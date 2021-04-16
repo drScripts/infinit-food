@@ -12,3 +12,5 @@ part 'rating_stars.dart';
 part 'food_card.dart';
 part 'custom_tabbar.dart';
 part 'food_list_item.dart';
+part 'order_list_item.dart';
+part 'profile_and_app_list.dart';

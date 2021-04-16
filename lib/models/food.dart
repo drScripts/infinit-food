@@ -1,6 +1,6 @@
 part of 'models.dart';
 
-class Food {
+class Food extends Equatable {
   final int id;
   final String picturePath;
   final String name;
@@ -18,6 +18,17 @@ class Food {
     this.price,
     this.rate,
   });
+
+  @override
+  List<Object> get props => [
+        id,
+        picturePath,
+        name,
+        description,
+        ingredients,
+        price,
+        rate,
+      ];
 }
 
 List<Food> mockFoods = [
@@ -27,7 +38,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
@@ -38,7 +49,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
@@ -49,7 +60,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
@@ -60,7 +71,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
@@ -71,7 +82,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
@@ -82,7 +93,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
@@ -93,7 +104,7 @@ List<Food> mockFoods = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49_CV0pbbEzThC_Bg3aGuBh7j5snCzMpllg&usqp=CAU',
     name: 'Sate Maranggi',
     description:
-        'Sate Maranggi dengan cita rasa khas purwakarta dengan daging yang melimpah',
+        'Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan teratur.',
     ingredients: 'Bawang merah, daging, ketumbar, kecap',
     price: 150000,
     rate: 4.2,
