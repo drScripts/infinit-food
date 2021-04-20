@@ -1,18 +1,32 @@
 part of 'pages.dart';
 
 class AddressPage extends StatefulWidget {
+  final User user;
+  final String password;
+  final File file;
+  AddressPage({this.user, this.password, this.file});
   _AddressPageState createState() => _AddressPageState();
 }
 
 class _AddressPageState extends State<AddressPage> {
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController houseNumberController = TextEditingController();
+  bool isLoading = false;
+
+  List<String> cities;
+  String selectedCity;
+
+  @override
+  void initState() {
+    super.initState();
+
+    cities = ['Bandung', 'Jakarta', 'Surabaya', 'Madura'];
+    selectedCity = cities[0];
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController phoneController = TextEditingController(text: "");
-    TextEditingController addressController = TextEditingController(text: "");
-    TextEditingController houseNumberController =
-        TextEditingController(text: "");
-    bool isLoading = false;
-
     return GeneralPages(
       onBack: () {
         Get.back();
@@ -39,9 +53,15 @@ class _AddressPageState extends State<AddressPage> {
             marginTop: 16,
           ),
           DropDownButtonWidget(
-            title: 'City',
-            subtitle: 'Select Your City',
-          ),
+              title: 'City',
+              subtitle: 'Select Your City',
+              cities: cities,
+              selectedCity: selectedCity,
+              onChange: (index) {
+                setState(() {
+                  selectedCity = index;
+                });
+              }),
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: margin26),
@@ -52,7 +72,52 @@ class _AddressPageState extends State<AddressPage> {
                     color: mainColorAmber,
                   )
                 : ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+
+                      User user = widget.user.copyWith(
+                        phoneNumber: phoneController.text,
+                        houseNumber: houseNumberController.text,
+                        address: addressController.text,
+                        city: selectedCity,
+                      );
+                      await context.read<UserCubit>().signUp(user, widget.password, pictureFile: widget.file);
+                      UserState state = context.read<UserCubit>().state;
+
+                      if (state is UserLoaded) {
+                        context.read<FoodCubit>().getFood();
+                        context.read<TransactionCubit>().getTransaction();
+                        Get.offAll(() => MainPage());
+                      } else {
+                        Get.snackbar(
+                          "",
+                          "",
+                          backgroundColor: Colors.pink,
+                          icon: Icon(
+                            MdiIcons.closeCircleOutline,
+                            color: Colors.white,
+                          ),
+                          titleText: Text(
+                            'Sign In Failed',
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          messageText: Text(
+                            (state as UserLoadingFailed).message,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                        setState(() {
+                          isLoading = false;
+                        });
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),
                       primary: mainColorAmber,

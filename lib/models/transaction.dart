@@ -8,6 +8,7 @@ class Transaction extends Equatable {
   final DateTime time;
   final TransactionStatus status;
   final User user;
+  final String url;
 
   Transaction({
     this.id,
@@ -17,16 +18,28 @@ class Transaction extends Equatable {
     this.time,
     this.status,
     this.user,
+    this.url,
   });
 
-  Transaction copyWith(
-      {int id,
-      int quantity,
-      int total,
-      Food food,
-      DateTime time,
-      TransactionStatus status,
-      User user}) {
+  factory Transaction.fromJson(Map<String, dynamic> json) {
+    return Transaction(
+      id: json['id'],
+      quantity: json['quantity'],
+      total: json['total'],
+      food: Food.fromJson(json['food']),
+      time: DateTime.fromMillisecondsSinceEpoch(json['created_at']),
+      status: (json['status'] == 'PENDING')
+          ? TransactionStatus.pending
+          : (json['status'] == 'DELIVERED')
+              ? TransactionStatus.delivered
+              : (json['status'] == 'CANCELED')
+                  ? TransactionStatus.cancel
+                  : TransactionStatus.onDelivery,
+      url: json['payment_url'],
+    );
+  }
+
+  Transaction copyWith({int id, int quantity, int total, Food food, DateTime time, TransactionStatus status, User user, String url}) {
     return Transaction(
       id: id ?? this.id,
       quantity: quantity ?? this.quantity,
@@ -35,6 +48,7 @@ class Transaction extends Equatable {
       time: time ?? this.time,
       status: status ?? this.status,
       user: user ?? this.user,
+      url: url ?? this.url,
     );
   }
 

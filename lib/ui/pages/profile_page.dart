@@ -25,6 +25,11 @@ class _ProfilePageState extends State<ProfilePage> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    User user = (context.watch<UserCubit>().state as UserLoaded).user;
+    String picture = user.picturePath;
+    String name = user.name;
+    String email = user.email;
+
     return ListView(
       children: [
         Column(
@@ -56,7 +61,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(widget.user.picturePath),
+                          image: NetworkImage(picture),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -64,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 6),
                     child: Text(
-                      widget.user.name,
+                      name,
                       style: blackFontStyle1.copyWith(
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
@@ -74,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: Text(
-                      widget.user.email,
+                      email,
                       style: greyFontStyle.copyWith(fontSize: 19),
                     ),
                   ),
@@ -101,8 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16,
                   ),
                   Column(
-                    children:
-                        (selectedIndex == 0 ? accountSetting : appSetting),
+                    children: (selectedIndex == 0 ? accountSetting : appSetting),
                   ),
                 ],
               ),

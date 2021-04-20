@@ -5,11 +5,13 @@ class InputTextWidget extends StatelessWidget {
   final String label;
   final TextEditingController emailController;
   final double marginTop;
+  final bool obscure;
   InputTextWidget({
     @required this.title,
     @required this.label,
     @required this.emailController,
     this.marginTop,
+    this.obscure,
   });
 
   @override
@@ -33,6 +35,7 @@ class InputTextWidget extends StatelessWidget {
           width: double.infinity,
           margin: EdgeInsets.symmetric(horizontal: defaultMargin),
           child: TextField(
+            obscureText: (obscure == null) ? false : obscure,
             controller: emailController,
             decoration: InputDecoration(
               hintText: label,

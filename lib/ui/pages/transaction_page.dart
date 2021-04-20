@@ -17,9 +17,7 @@ class _TransactionPageState extends State<TransactionPage> {
       children: [
         GeneralPages(
           onBack: () {
-            if (widget.onBack != null) {
-              widget.onBack();
-            }
+            widget.onBack();
           },
           title: 'Payment',
           subTitle: 'You deserve better meal',
@@ -29,8 +27,7 @@ class _TransactionPageState extends State<TransactionPage> {
               //// bagian atas
               Container(
                 margin: EdgeInsets.only(bottom: defaultMargin),
-                padding: EdgeInsets.symmetric(
-                    horizontal: defaultMargin, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 16),
                 width: double.infinity,
                 color: Colors.white,
                 child: Column(
@@ -52,8 +49,7 @@ class _TransactionPageState extends State<TransactionPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                      widget.transaction.food.picturePath),
+                                  image: NetworkImage(widget.transaction.food.picturePath),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -62,24 +58,16 @@ class _TransactionPageState extends State<TransactionPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width -
-                                      48 -
-                                      60 -
-                                      100,
+                                  width: MediaQuery.of(context).size.width - 48 - 60 - 100,
                                   child: Text(
                                     widget.transaction.food.name,
                                     maxLines: 1,
                                     overflow: TextOverflow.clip,
-                                    style:
-                                        blackFontStyle3.copyWith(fontSize: 16),
+                                    style: blackFontStyle3.copyWith(fontSize: 16),
                                   ),
                                 ),
                                 Text(
-                                  NumberFormat.currency(
-                                          locale: 'id',
-                                          decimalDigits: 0,
-                                          symbol: 'IDR ')
-                                      .format(widget.transaction.food.price),
+                                  NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: 'IDR ').format(widget.transaction.food.price),
                                   style: greyFontStyle.copyWith(fontSize: 13),
                                 ),
                               ],
@@ -105,25 +93,16 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 2 -
-                              defaultMargin -
-                              5,
+                          width: MediaQuery.of(context).size.width / 2 - defaultMargin - 5,
                           child: Text(
                             widget.transaction.food.name,
                             style: greyFontStyle.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 2 -
-                              defaultMargin -
-                              5,
+                          width: MediaQuery.of(context).size.width / 2 - defaultMargin - 5,
                           child: Text(
-                            NumberFormat.currency(
-                                    locale: 'id',
-                                    decimalDigits: 0,
-                                    symbol: 'IDR ')
-                                .format((widget.transaction.food.price) *
-                                    widget.transaction.quantity),
+                            NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: 'IDR ').format(widget.transaction.total),
                             style: blackFontStyle3.copyWith(fontSize: 14),
                             textAlign: TextAlign.right,
                           ),
@@ -142,11 +121,7 @@ class _TransactionPageState extends State<TransactionPage> {
                           style: greyFontStyle.copyWith(fontSize: 14),
                         ),
                         Text(
-                          NumberFormat.currency(
-                                  locale: 'id',
-                                  decimalDigits: 0,
-                                  symbol: 'IDR ')
-                              .format(50000),
+                          NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: 'IDR ').format(50000),
                           style: blackFontStyle3.copyWith(fontSize: 14),
                         ),
                       ],
@@ -164,13 +139,7 @@ class _TransactionPageState extends State<TransactionPage> {
                           style: greyFontStyle.copyWith(fontSize: 14),
                         ),
                         Text(
-                          NumberFormat.currency(
-                                  locale: 'id',
-                                  decimalDigits: 0,
-                                  symbol: 'IDR ')
-                              .format((widget.transaction.food.price *
-                                  widget.transaction.quantity *
-                                  0.1)),
+                          NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: 'IDR ').format((widget.transaction.total * 0.1)),
                           style: blackFontStyle3.copyWith(fontSize: 14),
                         ),
                       ],
@@ -195,21 +164,11 @@ class _TransactionPageState extends State<TransactionPage> {
                       children: [
                         Text(
                           'Total Price',
-                          style: greyFontStyle.copyWith(
-                              fontSize: 14, color: Color(0xff1ABC9C)),
+                          style: greyFontStyle.copyWith(fontSize: 14, color: Color(0xff1ABC9C)),
                         ),
                         Text(
-                          NumberFormat.currency(
-                                  locale: 'id',
-                                  decimalDigits: 0,
-                                  symbol: 'IDR ')
-                              .format(
-                            (widget.transaction.food.price *
-                                    widget.transaction.quantity *
-                                    0.1) +
-                                50000 +
-                                (widget.transaction.food.price *
-                                    widget.transaction.quantity),
+                          NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: 'IDR ').format(
+                            (widget.transaction.total * 0.1) + 50000 + (widget.transaction.total),
                           ),
                           style: blackFontStyle3.copyWith(
                             fontSize: 14,
@@ -225,8 +184,7 @@ class _TransactionPageState extends State<TransactionPage> {
 
               //// bagian 2
               Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: 16, horizontal: defaultMargin),
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: defaultMargin),
                 margin: EdgeInsets.only(bottom: defaultMargin),
                 color: Colors.white,
                 width: double.infinity,
@@ -245,8 +203,7 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             'Name',
                             style: greyFontStyle.copyWith(fontSize: 14),
@@ -255,8 +212,7 @@ class _TransactionPageState extends State<TransactionPage> {
                           ),
                         ),
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             widget.transaction.user.name,
                             style: blackFontStyle2.copyWith(fontSize: 14),
@@ -273,16 +229,14 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             'Phone No.',
                             style: greyFontStyle.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             widget.transaction.user.phoneNumber,
                             style: blackFontStyle2.copyWith(fontSize: 14),
@@ -299,16 +253,14 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             'Address',
                             style: greyFontStyle.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             widget.transaction.user.address,
                             style: blackFontStyle2.copyWith(fontSize: 14),
@@ -327,16 +279,14 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             'House No.',
                             style: greyFontStyle.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             widget.transaction.user.houseNumber,
                             style: blackFontStyle2.copyWith(fontSize: 14),
@@ -355,16 +305,14 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             'City',
                             style: greyFontStyle.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              (defaultMargin * 2),
+                          width: (MediaQuery.of(context).size.width / 2) - (defaultMargin * 2),
                           child: Text(
                             widget.transaction.user.city,
                             style: blackFontStyle2.copyWith(fontSize: 14),
@@ -391,7 +339,46 @@ class _TransactionPageState extends State<TransactionPage> {
                     color: mainColorAmber,
                   )
                 : ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      var result = await context.read<TransactionCubit>().submitTransaction(widget.transaction.copyWith(
+                            total: (widget.transaction.total * 1.1).toInt() + 50000,
+                          ));
+                      print(result);
+                      if (result != null) {
+                        Get.offAll(() => PaymentPage(
+                              paymentUrl: result,
+                            ));
+                      } else {
+                        setState(
+                          () {
+                            isLoading = false;
+                            Get.snackbar(
+                              "",
+                              "",
+                              colorText: Colors.white,
+                              backgroundColor: Color(0xffD9453E),
+                              titleText: Text(
+                                "Transaction Failed",
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              icon: Icon(MdiIcons.closeCircleOutline, color: Colors.white),
+                              messageText: Text(
+                                'Please try again later',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(312, 45),
                       primary: Color(0xffFFC700),
@@ -401,8 +388,7 @@ class _TransactionPageState extends State<TransactionPage> {
                     ),
                     child: Text(
                       'Checkout Now',
-                      style: blackFontStyle2.copyWith(
-                          fontSize: 14, fontWeight: FontWeight.w500),
+                      style: blackFontStyle2.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                   ),
           ),

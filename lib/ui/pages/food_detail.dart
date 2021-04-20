@@ -209,7 +209,24 @@ class _FoodDetailState extends State<FoodDetail> {
                             ],
                           ),
                           ElevatedButton(
-                            onPressed: (quantity < 1) ? null : () {},
+                            onPressed: (quantity < 1)
+                                ? null
+                                : () {
+                                    Get.to(() => TransactionPage(
+                                          transaction:
+                                              widget.transaction.copyWith(
+                                            status: TransactionStatus.pending,
+                                            quantity: quantity,
+                                            time: DateTime.now(),
+                                            total: (quantity *
+                                                widget.transaction.food.price),
+                                            id: 1,
+                                          ),
+                                          onBack: () {
+                                            Get.back();
+                                          },
+                                        ));
+                                  },
                             style: ElevatedButton.styleFrom(
                               onSurface: mainColorAmber,
                               primary: mainColorAmber,

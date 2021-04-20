@@ -76,9 +76,7 @@ class IllustrationPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 12),
               child: ElevatedButton(
-                onPressed: () {
-                  if (onTap2 != null) onTap2;
-                },
+                onPressed: onTap2,
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xff8D92A3),
                   minimumSize: Size(200, 45),

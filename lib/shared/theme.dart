@@ -17,3 +17,8 @@ TextStyle blackFontStyle3 =
     GoogleFonts.poppins().copyWith(color: Colors.black, fontSize: 14);
 TextStyle greyFontStyle =
     GoogleFonts.poppins().copyWith(color: lightGreyColor, fontSize: 14);
+
+SpinKitFadingCircle loadingIndicator = SpinKitFadingCircle(
+  size: 45,
+  color: mainColorAmber,
+);

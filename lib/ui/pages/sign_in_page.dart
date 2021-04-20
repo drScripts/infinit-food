@@ -5,12 +5,12 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController(text: "");
-    TextEditingController passwordController = TextEditingController(text: "");
-    bool isLoading = false;
-
     return GeneralPages(
       title: 'Sign In',
       subTitle: 'Find your best ever meal',
@@ -26,18 +26,56 @@ class _SignInPageState extends State<SignInPage> {
             label: 'Type your password',
             emailController: passwordController,
             marginTop: 16,
+            obscure: true,
           ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: isLoading
-                ? SpinKitFadingCircle(
-                    size: 45,
-                    color: mainColorAmber,
-                  )
+                ? loadingIndicator
                 : ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await context.read<UserCubit>().signIn(emailController.text, passwordController.text);
+
+                      //  mengambil state yang sedang berjalan
+                      UserState state = context.read<UserCubit>().state;
+                      // memeriksa state yang terjadi
+                      if (state is UserLoaded) {
+                        context.read<FoodCubit>().getFood();
+                        context.read<TransactionCubit>().getTransaction();
+                        Get.offAll(() => MainPage());
+                      } else {
+                        Get.snackbar(
+                          "",
+                          "",
+                          backgroundColor: Colors.pink,
+                          icon: Icon(
+                            MdiIcons.closeCircleOutline,
+                            color: Colors.white,
+                          ),
+                          titleText: Text(
+                            'Sign In Failed',
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          messageText: Text(
+                            (state as UserLoadingFailed).message,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                        setState(() {
+                          isLoading = false;
+                        });
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),
                       primary: mainColorAmber,

@@ -3,9 +3,15 @@ part of 'widget.dart';
 class DropDownButtonWidget extends StatelessWidget {
   final String title;
   final String subtitle;
+  final List<String> cities;
+  final String selectedCity;
+  final Function(dynamic index) onChange;
   DropDownButtonWidget({
     @required this.title,
     @required this.subtitle,
+    this.cities,
+    this.selectedCity,
+    this.onChange,
   });
 
   @override
@@ -36,33 +42,19 @@ class DropDownButtonWidget extends StatelessWidget {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
+              value: selectedCity,
               isExpanded: true,
-              onChanged: (item) {},
+              onChanged: onChange,
               icon: FaIcon(FontAwesomeIcons.angleDown),
-              hint: Text(
-                subtitle,
-                style: greyFontStyle.copyWith(fontSize: 18),
-              ),
-              items: [
-                DropdownMenuItem(
+              items: List.generate(cities.length, (index) {
+                return DropdownMenuItem(
+                  value: cities[index],
                   child: Text(
-                    'Bandung',
+                    cities[index],
                     style: blackFontStyle3,
                   ),
-                ),
-                DropdownMenuItem(
-                  child: Text(
-                    'Jakarta',
-                    style: blackFontStyle3,
-                  ),
-                ),
-                DropdownMenuItem(
-                  child: Text(
-                    'Surabaya',
-                    style: blackFontStyle3,
-                  ),
-                ),
-              ],
+                );
+              }),
             ),
           ),
         ),
